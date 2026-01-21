@@ -1,0 +1,9 @@
+version: '3'
+services:
+  kea-dhcp4:
+    image: docker.cloudsmith.io/isc/docker/kea-dhcp4:2.6.0
+    container_name: dhcp-docker-serveis
+    network_mode: "host"
+    volumes:
+      - ./kea-dhcp4.conf:/etc/kea/kea-dhcp4.conf
+    restart: always
