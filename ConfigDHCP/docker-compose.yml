@@ -1,28 +1,11 @@
 version: '3'
-
 services:
   dhcp-serveis:
-    
     image: docker.cloudsmith.io/isc/docker/kea-dhcp4:2.6.0
     container_name: dhcp-docker-serveis
-    networks:
-      kea-ipvlan:
-        
-        ipv4_address: 10.18.51.68
+    network_mode: "host"  # Això farà que no doni errors de permisos
     ports:
       - "67:67/udp"
-      - "67:67/tcp"
-      - "8000:8000/tcp"
     volumes:
-      
       - ./kea-dhcp4.conf:/etc/kea/kea-dhcp4.conf
     restart: always
-
-networks:
-  kea-ipvlan:
-    driver: ipvlan
-    driver_opts:
-      parent: eth0  
-    ipam:
-      config:
-        - subnet: 10.18.51.64/27  
